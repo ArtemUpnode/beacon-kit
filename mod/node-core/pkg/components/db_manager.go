@@ -35,8 +35,8 @@ type DBManagerInput[
 ] struct {
 	depinject.In
 	AvailabilityPruner pruner.Pruner[AvailabilityStoreT]
-	DepositPruner      pruner.Pruner[DepositStoreT]
-	Logger             LoggerT
+	// DepositPruner      pruner.Pruner[DepositStoreT] // TMP: DEBUGGING
+	Logger LoggerT
 }
 
 // ProvideDBManager provides a DBManager for the depinject framework.
@@ -49,7 +49,7 @@ func ProvideDBManager[
 ) (*manager.DBManager, error) {
 	return manager.NewDBManager(
 		in.Logger.With("service", "db-manager"),
-		in.DepositPruner,
+		// in.DepositPruner, // TMP: DEBUGGING
 		in.AvailabilityPruner,
 	)
 }
